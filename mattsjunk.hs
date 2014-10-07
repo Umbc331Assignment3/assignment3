@@ -27,11 +27,16 @@ fixstruct index student ss = do
 	and the second element is the list of already grouped students
 -}
 addstudent :: a -> (t, [a]) -> (t, [a])
-addstudent s curstu = head [ (y, s:g x) | let x = snd curstu , let y = fst curstu]
+addstudent s curstu = head [ (y, s: x) | let x = snd curstu , let y = fst curstu]
 
 outputlist :: Int -> [[Int]]
 outputlist numgroup =  map (drop 1) (map (:[]) [1..(numgroup)])
 
+--checkoutputlist (ss) curstu ol= 
+--	if (not . (elem curstu ol))
+--	then if
+--			map curstu currentstudent `checkindividual`
+--			then 
 
 						
 {-
