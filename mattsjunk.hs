@@ -29,7 +29,11 @@ fixstruct index student ss = do
 addstudent :: a -> (t, [a]) -> (t, [a])
 addstudent s curstu = head [ (y, s: x) | let x = snd curstu , let y = fst curstu]
 
+outputlist :: Int -> [[Int]]
+outputlist numgroup =  map (drop 1) (map (:[]) [1..(numgroup)])
 
+checkoutputlist ol = do
+						
 {-
 	Updates the current list of already grouped 
 	used for generating groups for assignment
