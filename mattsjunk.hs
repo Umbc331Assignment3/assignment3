@@ -32,12 +32,25 @@ addstudent s curstu = head [ (y, s: x) | let x = snd curstu , let y = fst curstu
 outputlist :: Int -> [[Int]]
 outputlist numgroup =  map (drop 1) (map (:[]) [1..(numgroup)])
 
---checkoutputlist (ss) curstu ol= 
+--checkoutputlist (ss) lookfor ol= 
 --	if (not . (elem curstu ol))
 --	then if
---			map curstu currentstudent `checkindividual`
+--			map currentstudent map lookfir `checkindividual`
 --			then 
+{-
+	lookfor = studentid to check
+	currentstudent = tuple 
+-}
+checkoutputlist :: StudentStruct -> Int -> [Int] -> Bool
+checkisinoutputlist ss curstu ol 
+	|(elem curstu ol) = True
+    |otherwise = False
 
+--checkoutputlist ss curstu ol
+
+{-
+-}
+checkgrouplist gl studenttuple = [ checkindividual x studenttuple |  x <- gl ]
 						
 {-
 	Updates the current list of already grouped 
@@ -55,11 +68,10 @@ updategroupedlist n l = filter (not . (==n)) l
 	otherwise will add student to group
 	TODO needs to the update grouped already list
 -}
-checkindividual :: Eq a => a -> (t, [a]) -> Either (t, [a]) Bool
-checkindividual lookingfor currentstudent = 
-	case elem lookingfor $ snd currentstudent of
-		True -> Right True
-		False -> Left $ addstudent lookingfor currentstudent
+
+checkindividual lookingfor currentstudent 
+	|(elem lookingfor $ snd currentstudent )== True = True
+	|otherwise = False
 
 {-
 altcheckind lookingfor currentstudent = 
@@ -86,8 +98,8 @@ checkmod x y = ( if mod x y == 0
 	call checkindividual lfor = student to look for
 	x is just the size of list
 -}
-checkall :: Eq a => [(t, [a])] -> a -> [Either (t, [a]) Bool]
-checkall students lfor = [ checkindividual lfor (students !! index )| index <- [1..((length students )-1)]]
+--checkall :: Eq a => [(t, [a])] -> a -> [Either (t, [a]) Bool]
+--checkall students lfor = [ checkindividual lfor (students !! index )| index <- [1..((length students )-1)]]
 
 {-
 	Keep running till current group size is filled
