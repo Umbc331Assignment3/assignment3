@@ -29,37 +29,6 @@ fixstruct index student ss = do
 addstudent :: a -> (t, [a]) -> (t, [a])
 addstudent s curstu = head [ (y, s: x) | let x = snd curstu , let y = fst curstu]
 
-outputlist :: Int -> [[Int]]
-outputlist numgroup =  map (drop 1) (map (:[]) [1..(numgroup)])
-
---checkoutputlist (ss) lookfor ol= 
---	if (not . (elem curstu ol))
---	then if
---			map currentstudent map lookfir `checkindividual`
---			then 
-{-
-	lookfor = studentid to check
-	currentstudent = tuple 
--}
-checkoutputlist :: StudentStruct -> Int -> [Int] -> Bool
-checkisinoutputlist ss curstu ol 
-	|(elem curstu ol) = True
-    |otherwise = False
-
---checkoutputlist ss curstu ol
-
-{-
--}
-checkgrouplist gl studenttuple = [ checkindividual x studenttuple |  x <- gl ]
-						
-{-
-	Updates the current list of already grouped 
-	used for generating groups for assignment
-	n = the student id to remove
-	l = the list of students not yet grouped
--}
-updategroupedlist :: Eq a => a -> [a] -> [a]
-updategroupedlist n l = filter (not . (==n)) l 
 
 {-
 	studentstruct !! number gives you currentstudent 
@@ -73,17 +42,46 @@ checkindividual lookingfor currentstudent
 	|(elem lookingfor $ snd currentstudent )== True = True
 	|otherwise = False
 
+---------------------------------------------------------------------------------
+
+outputlist :: Int -> [[Int]]
+outputlist numgroup =  map (drop 1) (map (:[]) [1..(numgroup)])
+
+--checkoutputlist (ss) lookfor ol= 
+--	if (not . (elem curstu ol))
+--	then if
+--			map currentstudent map lookfir `checkindividual`
+--			then 
 {-
-altcheckind lookingfor currentstudent = 
-	(if elem lookingfor $ snd currentstudent
-		then do {
-				return
-				}
-		else
-			do { 
-				addstudent lookingfor currentstudent
-				}
+	lookfor = studentid to check
+	currentstudent = tuple 
 -}
+checkisinoutputlist :: StudentStruct -> Int -> [Int] -> Bool
+checkisinoutputlist ss curstu ol 
+	|(elem curstu ol) = True
+    |otherwise = False
+
+---------------------------------------------------------------------------------
+
+--checkoutputlist ss curstu ol
+
+{-
+	TODO: Or these guys together
+	One True will make this student not able to add to this group
+-}
+checkgrouplist gl studenttuple =[ checkindividual x studenttuple |  x <- gl ]
+						
+{-
+	Updates the current list of already grouped 
+	used for generating groups for assignment
+	n = the student id to remove
+	l = the list of students not yet grouped
+-}
+updategroupedlist :: Eq a => a -> [a] -> [a]
+updategroupedlist n l = filter (not . (==n)) l 
+
+---------------------------------------------------------------------------------
+
 
 --TODO make output True for true conidtion
 --Checks if the total number of students can be split into said group size
@@ -93,37 +91,5 @@ checkmod x y = ( if mod x y == 0
 	else putStrLn $"Cannot pair up " ++ 
 	(show x) ++ " students into groups of " 
 	++ show(y) ++ " across eight assignments")
-{-
-	should iterate entire list of students
-	call checkindividual lfor = student to look for
-	x is just the size of list
--}
---checkall :: Eq a => [(t, [a])] -> a -> [Either (t, [a]) Bool]
---checkall students lfor = [ checkindividual lfor (students !! index )| index <- [1..((length students )-1)]]
-
-{-
-	Keep running till current group size is filled
-	lookingfor
--}
---groupstudent lookingfor currentstudent gl= do
---										addstudent lookingfor currentstudent
---										updategroupedlist lookingfor gl
-
-
-
---groupassignment ss y = do
-							--let notgrouped = [1..(length ss)]					
-							--						
-
-
-
-program x y = do
-	let ss = studentstruct [1..x]
-	checkmod x y --last statement must be expression in so haskell doesnt bitch
-	--groupassignment ss y			
-
-
-
-
 
 
