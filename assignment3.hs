@@ -57,7 +57,14 @@ checkindividual lookingfor currentstudent
 
 
 
-
+{-
+	TODO make output True for true conidtion
+	Checks if the total number of students can be split into said group size
+-}
+checkmod :: Int -> Int -> Bool
+checkmod x y 
+       | mod x y == 0 = True
+       | otherwise = False
  
 {-
 	
@@ -80,13 +87,17 @@ main =
 	progName <- getProgName
         let students = read(head args) :: Int       --now we can use ints!
         let grpsize = read(head $tail args) :: Int
-	putStrLn "The number of students are:"
-        putStrLn students
-        putStrLn "The group size is: "
-        putStrLn grpsize
-	putStrLn "Program name is:"
-	putStrLn progName
-        
 
+        if checkmod students grpsize
+           then
+               listGen (splitList students grpsize) [1..students] grpsize
+                 
+           else
+               do
+                 putStrLn $"Cannot pair up " ++ 
+		show(students) ++ " students into groups of " 
+		++ show(grpsize) ++ " across eight assignments"
+   
+        
 
 
