@@ -1,8 +1,54 @@
 import System.Environment
 import System.IO
 import Data.List
-import System.IO
+import Control.Applicative
 
+
+
+
+combinations :: Int -> [a] -> [[a]]
+combinations 0 _ = [[]]
+combinations n xs = [ xs !! i : x | i <- [0..(length xs)-1] 
+                                  , x <- combinations (n-1) (drop (i+1) xs)]
+                                 
+firstpos xs = [x | x <- xs, head x == 1 ]
+secondpos xs = [x | x <- xs, (head (tail x)) == 2 ]
+
+showall xs = [y | x <- xs, y <-x, y ]
+
+each xs stu = [checkindividual y stu | y <- x,x <-xs]
+
+studentstruct ss = [(x,[x]) | x <- ss]  
+
+fixstruct index student ss = do
+	let (fh,_:sh) = splitAt (index - 1) ss
+	fh ++ student : sh
+
+checkindividual lookingfor currentstudent 
+	|(elem lookingfor $ snd currentstudent )== True = True
+	|otherwise = False
+
+
+
+
+ 
+
+groupedTogether xs ys = [ y : ys | y <- xs, (not (elem y ys))]
+
+--checkeach xs cur
+--	| (length xs) == numbuniquegroups = xs
+--	| [ | (a,b,_,_) <- xs, a != b]
+--buildassignmnet xs = [x:[] | x <- xs ]
+
+--eliminate xs
+--	| (length xs) == numbuniquegroups/8 = xs
+--	| 
+--capture :: Ord => [a] -> [b] -> Int
+capture xs ys = length [x | x <- xs,(not (elem x ys))]
+
+
+x = combinations 4 [1..10]
+--capture x []
 
 --http://www.reddit.com/r/haskell/comments/1vras3/haskell_io_how_to_read_numbers/
 
@@ -14,14 +60,13 @@ main =
 	progName <- getProgName
         let students = read(head args) :: Int       --now we can use ints!
         let grpsize = read(head $tail args) :: Int
-	putStrLn "The number of stoodents aer:"
+	putStrLn "The number of students are:"
         putStrLn students
-        putStrLn "Teh greup siez is: "
+        putStrLn "The group size is: "
         putStrLn grpsize
 	putStrLn "Program name is:"
 	putStrLn progName
-        return (students, grpsize)        
-        return ()
+        
 
 
 
