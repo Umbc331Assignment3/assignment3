@@ -29,7 +29,7 @@ main =
                  
            else
                do
-                 putStrLn "Cannot pair up that many students in groups of that size all at once"
+                 putStrLn "Cannot pair up " ++ (show students) ++ " students into groups of " ++ show(grpsize) ++ " across eight assignments"
    
         
 
