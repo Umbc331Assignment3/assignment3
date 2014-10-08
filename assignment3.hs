@@ -21,12 +21,12 @@ main =
         if checkmod students grpsize
            then
                do
-               let a = combinations (students `div` grpsize) [1..students]
-                   b = getUnique a
-               if (length b) < 8 * (students `div` grpsize)
+               let a = combinations (students `div` grpsize) [1..students] --gets combinations of maximum group size
+                   b = getUnique a  --gets the combinations of maximum group size where no one works together more than once 
+               if (length b) < 8 * (students `div` grpsize) --fail
                   then putStrLn "it is impossible to group all the students in maximum group sizes for every assignment"
                   else
-                 
+                      mapM_ putStrLn b --prints out the unique combinations
            else
                do
                  putStrLn "Cannot pair up " ++ (show students) ++ " students into groups of " ++ show(grpsize) ++ " across eight assignments"
