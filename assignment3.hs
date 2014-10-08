@@ -1,3 +1,8 @@
+{-
+	Assignment3 
+	Written by: Michael Schwarz Stuart Woodbury Neh Patel and Matthew Henry
+
+-}
 import System.Environment
 import System.IO
 import Data.List
