@@ -79,6 +79,11 @@ updateNotGroupedList :: Eq a => a -> [a] -> [a]
 updateNotGroupedList n l = filter (not . (==n)) l 
 ---------------------------------------------------------------------------------
 
+fillgroup ol grpsize = (if (length ol) == grpsize
+						then 
+
+
+
 
 --TODO make output True for true conidtion
 --Checks if the total number of students can be split into said group size
