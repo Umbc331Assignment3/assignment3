@@ -59,7 +59,9 @@ checkindividual lookingfor currentstudent
 
 
  
-
+{-
+	
+-}
 groupedTogether xs ys = [ y : ys | y <- xs, (not (elem y ys))]
 
 
