@@ -12,11 +12,12 @@ import Control.Applicative
 -}
 
 
-{-returns a double list of all size n combinations of list xs-}
+{-produces all combinations-}
+--http://www.haskell.org/haskellwiki/99_questions/Solutions/26
 combinations :: Int -> [a] -> [[a]]
 combinations 0 _ = [[]]
-combinations n xs = [ xs !! i : x | i <- [0..(length xs)-1] 
-                                  , x <- combinations (n-1) (drop (i+1) xs)]
+combinations _ [] = []
+combinations n (x:xs) = (map (x:) (combinations (n-1) xs)) ++ (combinations n xs)
 
 {-captures all groups with no two groups having students grouped more than once-}
 reOccurances:: (Ord a) => [a] -> [a] -> Int
@@ -42,3 +43,7 @@ checkmod :: Int -> Int -> Bool
 checkmod x y 
        | mod x y == 0 = True
        | otherwise = False
+
+--http://stackoverflow.com/questions/932639/haskell-cant-use-map-putstrln
+mapM_ :: Monad m => (a -> m b) -> [a] -> m ()
+
