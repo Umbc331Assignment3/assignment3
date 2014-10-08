@@ -43,15 +43,51 @@ int contains(Array *a, int target) {
 
 }
 
+int validPartner(Array *a, int perspectivePartner, int** currentGroups) {
+
+  int x;
+  int y;
+  for (x = 0; x < sizeof(currentGroups)/sizeof(currentGroups[0]); x++) {
+    for (y = 0; x < sizeof(currentGroups[0])/sizeof(currentGroups[0][0]); x++ ) {
+      if (currentGroups[x][y] == validPartner) {
+	return 0;
+      }
+    }
+  }
+
+  if (contains(a, perspectivePartner)) {
+
+    return 0;
+  }
+
+  return 1;
+
+
+
+}
+
 int main (int argc, char *argv[]) {
 
-  int groupsize = argv[2];
-  int studentAmount = argv[1];
+
+  
+
+  
+  int groupsize = atoi(argv[2]);
+  int studentAmount = atoi(argv[1]);
   Array students[studentAmount];
-  int i;
 
-  printf("The groupsize %d The students %d", groupsize, studentAmount);
+  int currentGroups[studentAmount][groupsize];
 
+  int x;
+  for (x = 0; x < studentAmount; x++) {
+    initArray(&students[x], 1);
+  }
+  
+int i;
+
+  printf("The groupsize %d The students %d \n", groupsize, studentAmount);
+  
+  
   for (i = 0; i < 8; i++ ) {
   
     printf("Assignment %d ", i+1);
@@ -61,17 +97,22 @@ int main (int argc, char *argv[]) {
       printf("( %d", j+1);
       int k;
       for (k = 0; k < studentAmount; k++) {
-      
-	if ((!contains(students[j], k)) && counter < groupsize) {
-	  insertArray(students[j], k);
-	  insertArray(students[k], j);
+	
+	if ((validPartner(&students[j], k, currentGroups)) && counter+1 < groupsize) {
+	  //currentGroups[0][0] = 10;
+	  insertArray(&students[j], k);
+	  insertArray(&students[k], j);
 	  counter= counter + 1;
-	  printf(", %d", k+1);
+	  printf(", %d", k);
 	  
-	 }      
+	}
+        
       }
-      printf(") /n");
+      counter = 0;
+      printf(")");
     }
+    printf(" \n");
   } 
+  
 }
 
