@@ -29,12 +29,6 @@ secondpos xs = [x | x <- xs, (head (tail x)) == 2 ]
 showall xs = [y | x <- xs, y <-x, y ]
 
 {-
-	
--}
-each xs stu = [checkindividual y stu | y <- x,x <-xs]
-
-
-{-
 	creates a list of tuples containing an int and a 
 	list of other ints meant to contain the student and
 	the students it has been grouped with
@@ -42,7 +36,8 @@ each xs stu = [checkindividual y stu | y <- x,x <-xs]
 studentstruct ss = [(x,[x]) | x <- ss]  
 
 {-
-	
+	Remakes the studentstruct so that it is recreated
+	essentially the fix for not being able to pass by reference
 -}
 fixstruct index student ss = do
 	let (fh,_:sh) = splitAt (index - 1) ss
@@ -71,11 +66,11 @@ checkmod x y
 -}
 groupedTogether xs ys = [ y : ys | y <- xs, (not (elem y ys))]
 
-
+{-
+	capture retrieves a list within another list if the element is in the first list
+-}
 capture xs ys = length [x | x <- xs,(not (elem x ys))]
 
-
-x = combinations 4 [1..10]
 
 --http://www.reddit.com/r/haskell/comments/1vras3/haskell_io_how_to_read_numbers/
 
