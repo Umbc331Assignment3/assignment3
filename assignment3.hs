@@ -7,6 +7,8 @@ import Control.Applicative
 
 {-
 	Combinations gets all possible combinations of a list of numbers
+	http://www.haskell.org/haskellwiki/99_questions/Solutions/26
+	"99 Questions/Solutions/26." - HaskellWiki. N.p., n.d. Web. 07 Oct. 2014.
 -}
 combinations :: Int -> [a] -> [[a]]
 combinations 0 _ = [[]]
@@ -44,7 +46,11 @@ fixstruct index student ss = do
 	fh ++ student : sh
 
 {-
-	
+	studentstruct !! number gives you currentstudent 
+	looking for is the student to check for
+	returns true if student has already been grouped with this student
+	otherwise will add student to group
+	TODO needs to the update grouped already list
 -}
 checkindividual lookingfor currentstudent 
 	|(elem lookingfor $ snd currentstudent )== True = True
@@ -53,7 +59,6 @@ checkindividual lookingfor currentstudent
 
 
 {-
-	TODO make output True for true conidtion
 	Checks if the total number of students can be split into said group size
 -}
 checkmod :: Int -> Int -> Bool
@@ -61,11 +66,6 @@ checkmod x y
        | mod x y == 0 = True
        | otherwise = False
  
-{-
-	
--}
-groupedTogether xs ys = [ y : ys | y <- xs, (not (elem y ys))]
-
 {-
 	capture retrieves a list within another list if the element is in the first list
 -}
